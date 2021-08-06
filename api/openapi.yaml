@@ -35,3 +35,75 @@ paths:
       responses:
         200:
           description: Success
+
+  /api/tabnews:
+    post:
+      operationId: api.tabnews.create_tabnews
+      summary: Create a new Tabnews
+      tags:
+        - Tabnews
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                  example: 101 facts that prove the Earth is flat
+                  minLength: 12
+                description:
+                  type: string
+                  example: Despite being a maiority, in absolute terms, few people know the real truth...
+
+      responses:
+        201:
+          description: Tabnews created succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tabnews"
+        400:
+          description: Invalid data to create a Tabnews
+
+components:
+  schemas:
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        avatar:
+          type: string
+          example: http://example.com/img/avatar/jose_thumb.png
+          nullable: true
+
+    Tabnews:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+        slug:
+          type: string
+          example: python-is-a-greate-option-for-backend-and-apis-42
+        title:
+          type: string
+          example: Python is a great option for backend and APIs
+        description:
+          type: string
+          nullable: true
+        author:
+          $ref: "#/components/schemas/Author"
+        created_at:
+          type: string
+          format: date-time
+          example: 2021-01-11T11:32:28Z
