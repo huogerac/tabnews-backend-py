@@ -1,5 +1,4 @@
 from datetime import datetime, timezone
-from sqlalchemy.dialects.postgresql import JSONB
 import sqlalchemy as sa
 
 from ext.database import db
