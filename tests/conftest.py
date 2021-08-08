@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app import create_app
 from ext.database import db
+from models.users import User
 
 
 @pytest.fixture(scope="session")
@@ -37,3 +38,11 @@ def db_session(app):
     trans.rollback()
     conn.close()
     db.session.remove()
+
+
+@pytest.fixture
+def user_mock(db_session):
+    new_user = User(name="John Doe", email="john@doe.com")
+    db_session.add(new_user)
+    db_session.commit()
+    return new_user

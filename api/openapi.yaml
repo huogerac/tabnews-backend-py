@@ -36,6 +36,50 @@ paths:
         200:
           description: Success
 
+  /api/auth/login:
+    post:
+      operationId: api.auth.login
+      summary: User login to get a JWT Token
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  example: john@doe.com
+                password:
+                  type: string
+                  example: "@bC1234"
+      responses:
+        200:
+          description: JWT Access Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: "#/components/schemas/User"
+                  token:
+                    type: string
+                    example: Encripted.JWT.Token
+                  refresh_token:
+                    type: string
+                    example: Another.Encripted.JWT.Token.With.Long.Expiration
+        400:
+          description: Bad request. You must send an email and password
+        401:
+          description: Email or password is not valid
+
   /api/tabnews:
     post:
       operationId: api.tabnews.create_tabnews
@@ -72,6 +116,19 @@ paths:
 
 components:
   schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john@doe.com
+
     Author:
       type: object
       properties:
