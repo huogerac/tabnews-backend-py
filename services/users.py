@@ -5,9 +5,8 @@ from ext.database import db
 from exceptions import ConflictValueException
 
 
-def list_users():
-    users = User.query.all()
-    return [user.to_dict() for user in users]
+def get_user_by_email(email):
+    return User.query.filter_by(email=email).first()
 
 
 def create_user(name, email, password):

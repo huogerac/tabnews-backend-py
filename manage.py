@@ -24,7 +24,7 @@ def cli():
 @click.option("--email", prompt=True, required=True)
 @click.password_option(help="Password.")
 def create_user(name, email, password):
-    """Create User"""
+    """Create User from the command line"""
     try:
         new_user = users_service.create_user(name, email, password)
         print(json.dumps(new_user, indent=2))

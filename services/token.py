@@ -7,7 +7,7 @@ from exceptions import UnauthorizedException
 
 def generate_token(user, days=None, hours=None, scope=None):
     if not scope:
-        scope = ["tabnews:list"]
+        scope = ["tabnews:create"]
 
     if days is None:
         days = current_app.config["JWT_EXPIRE_DAYS"]

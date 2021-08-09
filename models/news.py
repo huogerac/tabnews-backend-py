@@ -11,7 +11,6 @@ class Tabnews(db.Model):
 
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     title = sa.Column(sa.String(128), nullable=False)
-    slug = sa.Column(sa.String(256), nullable=False, unique=True)
     description = sa.Column(sa.UnicodeText(), nullable=True)
     created_at = sa.Column(
         sa.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
@@ -23,3 +22,12 @@ class Tabnews(db.Model):
     )
 
     author = db.relationship(User, backref=db.backref("tabnews", lazy="dynamic"))
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "created_at": self.created_at.isoformat(),
+            "author": self.author.to_dict(),
+        }

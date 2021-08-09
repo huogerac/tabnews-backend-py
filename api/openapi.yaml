@@ -26,16 +26,6 @@ paths:
         200:
           description: Success
 
-  /api/users:
-    get:
-      operationId: api.users.list_users
-      summary: Returns users list
-      tags:
-        - Users
-      responses:
-        200:
-          description: Success
-
   /api/auth/login:
     post:
       operationId: api.auth.login
@@ -81,11 +71,23 @@ paths:
           description: Email or password is not valid
 
   /api/tabnews:
+    get:
+      operationId: api.tabnews.list_tabnews
+      summary: Returns the latest tabnews
+      tags:
+        - Tabnews
+
+      responses:
+        200:
+          description: Success
+
     post:
       operationId: api.tabnews.create_tabnews
       summary: Create a new Tabnews
       tags:
         - Tabnews
+      security:
+        - jwtAuth: [tabnews:create]
       requestBody:
         required: true
         content:
@@ -113,8 +115,19 @@ paths:
                 $ref: "#/components/schemas/Tabnews"
         400:
           description: Invalid data to create a Tabnews
+        401:
+          description: Not Authorized
 
 components:
+  securitySchemes:
+    jwtAuth:
+      type: oauth2
+      x-tokenInfoFunc: services.token.check_token_info
+      flows:
+        authorizationCode:
+          tokenUrl: "url"
+          authorizationUrl: "url"
+
   schemas:
     User:
       type: object
@@ -149,9 +162,6 @@ components:
         id:
           type: integer
           example: 42
-        slug:
-          type: string
-          example: python-is-a-greate-option-for-backend-and-apis-42
         title:
           type: string
           example: Python is a great option for backend and APIs
