@@ -1,6 +1,7 @@
 # Web API
 Flask==1.1.4
 connexion[swagger-ui]==2.9.0
+Flask-Cors==3.0.10
 
 # Deploy
 gunicorn==20.1.0
@@ -15,3 +16,4 @@ Flask-Migrate==2.7.0
 
 # AUTH
 PyJWT==2.1.0
+Authlib==0.15.4

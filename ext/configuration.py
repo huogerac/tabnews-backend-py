@@ -31,6 +31,10 @@ class ProductionConfig:  # pylint: disable=R0903
     JWT_EXPIRE_HOURS = int(os.getenv("JWT_EXPIRE_HOURS", "0"))
     JWT_RTOKEN_EXPIRE_DAYS = int(os.getenv("JWT_RTOKEN_EXPIRE_DAYS", "180"))
 
+    # AUTH and OAuth
+    GITHUB_CLIENT_ID = os.getenv("GITHUB_CLIENT_ID")
+    GITHUB_CLIENT_SECRET = os.getenv("GITHUB_CLIENT_SECRET")
+
 
 class DevelopmentConfig(ProductionConfig):  # pylint: disable=R0903
     FLASK_ENV = "development"

@@ -70,6 +70,26 @@ paths:
         401:
           description: Email or password is not valid
 
+  /api/auth/github/login:
+    get:
+      operationId: api.auth.github_login
+      description: Login github
+      tags:
+        - Auth
+      responses:
+        200:
+          description: Success
+
+  /api/auth/github/authorize:
+    get:
+      operationId: api.auth.github_authorize
+      description: Token
+      tags:
+        - Auth
+      responses:
+        200:
+          description: Success
+
   /api/tabnews:
     get:
       operationId: api.tabnews.list_tabnews
