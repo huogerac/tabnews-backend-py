@@ -26,3 +26,13 @@ def create_user(name, email, password):
     db.session.commit()
 
     return new_user.to_dict()
+
+
+def get_or_create_user_by_oauth_login(email, name, avatar):
+    # ADD: provider, provider_id, oauth_dict
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        user = User(name=name, email=email, avatar=avatar)
+        db.session.add(user)
+        db.session.commit()
+    return user.to_dict()

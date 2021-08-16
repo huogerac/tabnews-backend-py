@@ -32,6 +32,8 @@ class ProductionConfig:  # pylint: disable=R0903
     JWT_RTOKEN_EXPIRE_DAYS = int(os.getenv("JWT_RTOKEN_EXPIRE_DAYS", "180"))
 
     # AUTH and OAuth
+    SERVER_NAME = os.getenv("SERVER_NAME", "127.0.0.1:5000")
+    CLIENT_SERVER_URL = os.getenv("CLIENT_SERVER_URL", "http://127.0.0.1:8080")
     GITHUB_CLIENT_ID = os.getenv("GITHUB_CLIENT_ID")
     GITHUB_CLIENT_SECRET = os.getenv("GITHUB_CLIENT_SECRET")
 

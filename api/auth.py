@@ -1,6 +1,8 @@
-from flask import url_for, redirect
+from flask import url_for, redirect, current_app
+
 from ext.oauth import oauth
 from services import auth as auth_services
+from services import users as users_services
 
 
 def login(body):
@@ -14,9 +16,23 @@ def github_login():
 
 def github_authorize():
     token = oauth.github.authorize_access_token()
-    # user = oauth.github.parse_id_token(token)
     resp = oauth.github.get("user", token=token)
     profile = resp.json()
+    user = users_services.get_or_create_user_by_oauth_login(
+        email=profile["email"],
+        name=profile.get("name"),
+        avatar=profile.get("avatar_url"),
+    )
+
+    authentication = auth_services.oauth_authenticate(user["email"])
+
+    redirect_uri = "{}/authorize?token={}&refresh_token={}".format(
+        current_app.config["CLIENT_SERVER_URL"],
+        authentication["token"],
+        authentication["refresh_token"],
+    )
+    return redirect(redirect_uri, code=302)
+
     # auth_id, secret_key = auth_services.save_authorization(
     #     email=user.get("email"),
     #     nome=user.get("name"),
@@ -44,5 +60,7 @@ def github_authorize():
     #     location: "São José dos Campos",
     #     login: "huogerac",
     #     name: "Roger Camargo",
+    #     id: 962233,
+    #     node_id: "MDQ6VXNlcjk2MjIzMw==",
     # }
-    return profile
+    # return profile
