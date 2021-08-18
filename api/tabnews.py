@@ -13,4 +13,4 @@ def create_tabnews(body, token_info=None):
         body.get("description"),
         token_info["email"],
     )
-    return jsonify(tabnews)
+    return jsonify(tabnews), 201

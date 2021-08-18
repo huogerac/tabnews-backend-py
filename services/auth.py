@@ -25,7 +25,7 @@ def authenticate(email, password):
     if not valid_password:
         raise UnauthorizedException(INVALID_LOGIN_MSG)
 
-    return _generate_user_login_tokens()
+    return _generate_user_login_tokens(user)
 
 
 def oauth_authenticate(email):

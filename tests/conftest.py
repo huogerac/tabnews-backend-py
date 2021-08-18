@@ -46,3 +46,15 @@ def user_mock(db_session):
     db_session.add(new_user)
     db_session.commit()
     return new_user
+
+
+@pytest.fixture
+def valid_token_mock():
+    """Decode this token at https://jwt.io"""
+    return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6ImF1dGgubG9jYWxob3N0IiwiZXhwIjoxNjM3MDkwNDI2LCJleHBpcmVfZGF0ZSI6IjIwMjEtMTEtMTZUMTk6MjA6MjYuNzQ2Mjc1KzAwOjAwIiwic3ViIjoyLCJlbWFpbCI6ImpvaG5AZG9lLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImF2YXRhciI6bnVsbCwic2NvcGUiOlsidGFibmV3czpjcmVhdGUiXX0.XAXcwMN_elByQ0JrPR2sRS4nQHhBksSBzS_SKocMVuI"
+
+
+@pytest.fixture
+def valid_token_with_no_permissions_mock():
+    """Decode this token at https://jwt.io"""
+    return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6ImF1dGgubG9jYWxob3N0IiwiZXhwIjoxNjM3MDkwNjEzLCJleHBpcmVfZGF0ZSI6IjIwMjEtMTEtMTZUMTk6MjM6MzMuNDY5NzAzKzAwOjAwIiwic3ViIjoyLCJlbWFpbCI6ImpvaG5AZG9lLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImF2YXRhciI6bnVsbCwic2NvcGUiOltdfQ.PbSwwlRMEizJGMIXe-GpxJUv3-eNupgu68QaMa87_R0"

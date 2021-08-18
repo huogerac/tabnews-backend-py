@@ -77,8 +77,8 @@ paths:
       tags:
         - Auth
       responses:
-        200:
-          description: Success
+        302:
+          description: Redirect to the authorization
 
   /api/auth/github/authorize:
     get:
@@ -87,8 +87,8 @@ paths:
       tags:
         - Auth
       responses:
-        200:
-          description: Success
+        302:
+          description: Redirect to the frontend
 
   /api/tabnews:
     get:
@@ -99,7 +99,13 @@ paths:
 
       responses:
         200:
-          description: Success
+          description: The lastest Tabnews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tabnews"
 
     post:
       operationId: api.tabnews.create_tabnews
@@ -136,7 +142,9 @@ paths:
         400:
           description: Invalid data to create a Tabnews
         401:
-          description: Not Authorized
+          description: No Authorization
+        403:
+          description: No Permission
 
 components:
   securitySchemes:
