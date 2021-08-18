@@ -24,6 +24,7 @@ def generate_token(user, days=None, hours=None, scope=None):
             "sub": user.id,
             "email": user.email,
             "name": user.name,
+            "avatar": user.avatar,
             "scope": scope,
         },
         current_app.config["SECRET_KEY"],
