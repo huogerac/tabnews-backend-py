@@ -3,17 +3,19 @@
 openapi: 3.0.2
 
 info:
-  version: 0.1.0
+  version: 0.1.1
   title: Tabnews (side project) API Backend
   description: API and database for auth, users and news
   contact:
-    name: Roger
-    email: roger@na-inter.net
-    url: https://roger.na-inter.net
+    name: Tabnews Backend separado do frontend, Design first API
+    email: tabnews@tabnews.com.br
+    url: https://tabnews-web.vercel.app/
 
 servers:
   - url: http://127.0.0.1:5000
     description: Local
+  - url: https://tabnewspy.herokuapp.com
+    description: Development
 
 paths:
   /api/version:
