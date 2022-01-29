@@ -14,7 +14,7 @@ info:
 servers:
   - url: http://127.0.0.1:5000
     description: Local
-  - url: https://tabnewspy.herokuapp.com
+  - url: https://tabnewsapi.herokuapp.com
     description: Development
 
 paths:
